@@ -11,28 +11,40 @@ const Player = ({
   onLoadedData,
   repeat,
 }) => {
-  const ref = useRef(null);
-  // eslint-disable-next-line no-unused-expressions
-  if (ref.current) {
-    if (isPlaying) {
-      ref.current.play();
-    } else {
-      ref.current.pause();
-    }
-  }
+  const audioRef = useRef(null);
 
+  // Set volume
   useEffect(() => {
-    ref.current.volume = volume;
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
   }, [volume]);
-  // updates audio element only on seekTime change (and not on each rerender):
+
+  // Set current time
   useEffect(() => {
-    ref.current.currentTime = seekTime;
+    if (audioRef.current && seekTime !== audioRef.current.currentTime) {
+      audioRef.current.currentTime = seekTime;
+    }
   }, [seekTime]);
+
+  // Play or pause audio
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
 
   return (
     <audio
-      // src={activeSong?.attributes?.previews[0]?.url}
-      ref={ref}
+      src={
+        activeSong?.attributes?.previews[0]?.url ||
+        activeSong?.hub?.actions?.[1].uri
+      }
+      ref={audioRef}
       loop={repeat}
       onEnded={onEnded}
       onTimeUpdate={onTimeUpdate}
@@ -41,4 +53,4 @@ const Player = ({
   );
 };
 
-export default Player;
+export default React.memo(Player);

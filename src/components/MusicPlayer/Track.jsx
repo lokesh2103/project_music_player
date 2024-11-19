@@ -8,24 +8,24 @@ const Track = ({ isPlaying, isActive, activeSong }) => (
       } hidden sm:block h-16 w-16 mr-4`}
     >
       <img
-        // src={activeSong?.attributes?.artwork?.url}
+        src={
+          activeSong?.attributes?.artwork?.url || activeSong?.images?.coverart
+        }
         alt="cover art"
         className="rounded-full"
       />
     </div>
     <div className="w-[50%]">
       <p className="truncate text-white font-bold text-lg">
-        {activeSong?.attributes?.name1
-          ? activeSong?.attributes?.name
-          : 'No active Song'}
+        {activeSong?.attributes?.name || activeSong?.title || 'No active Song'}
       </p>
       <p className="truncate text-gray-300">
-        {activeSong?.attributes?.artistName1
-          ? activeSong?.attributes?.artistName
-          : 'No active Song'}
+        {activeSong?.attributes?.artistName ||
+          activeSong?.subtitle ||
+          'No active Song'}
       </p>
     </div>
   </div>
 );
 
-export default Track;
+export default React.memo(Track);

@@ -28,7 +28,7 @@ const Discover = () => {
           Discover - {genreTitle || 'Hip Hop'} Songs
         </h2>
 
-        {/* <select
+        <select
           onChange={(e) => dispatch(selectGenreListId(e.target.value))}
           value={genreListId || 'HIP_HOP_RAP'}
           className="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
@@ -38,7 +38,7 @@ const Discover = () => {
               {genre.title}
             </option>
           ))}
-        </select> */}
+        </select>
       </div>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">

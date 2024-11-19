@@ -23,8 +23,8 @@ const Searchbar = () => {
         Search all files
       </label>
       <div className="flex flex-row justify-start items-center">
-        {/* <FiSearch aria-hidden="true" className="w-5 h-5 ml-4" /> */}
-        {/* <input
+        <FiSearch aria-hidden="true" className="w-5 h-5 ml-4" />
+        <input
           name="search-field"
           autoComplete="off"
           id="search-field"
@@ -33,7 +33,7 @@ const Searchbar = () => {
           type="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-        /> */}
+        />
       </div>
     </form>
   );
